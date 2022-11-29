@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD 3.0//EN"
+						"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.springlec.base.dao.BDao">
+
+
+	<!-- resultType은 값을 가져오기 위한 것일 때 선언하는 것으로 생각 -->
+	<select id="listDao" resultType="com.springlec.base.model.BDto">
+		SELECT * FROM mvc_board
+	</select>
+
+	<insert id="writeDao">
+		insert into mvc_board(bName, bTitle, bContent, bDate)values(#{bName}, #{bTitle}, #{bContent}, now())
+		<!-- ?이걸로 할 필요 없이 mysql문 그대로를 입력하면 됨, 대신 #{}를 사용해야함 -->
+	
+	</insert>
+	
+	<select id="viewDao" resultType="com.springlec.base.model.BDto">
+		select*from mvc_board where bId = #{bId}
+	</select>
+	
+	<delete id="deleteDao"><!-- delete문은 resultType이 필요하지 않음 -->
+		delete from mvc_board where bId= #{bId};
+	</delete>
+	
+	<update id="modify">
+		update mvc_board set bName = #{bName}, bTitle = #{bTitle}, bContent = #{bContent}, bDate = now() where bId=#{bId};
+	
+	</update>
+</mapper>

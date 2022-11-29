@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD 3.0//EN"
+						"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+						
+<mapper namespace="com.springlec.base.dao.ADao">
+
+	<select id="listDao" resultType="com.springlec.base.model.ADto">
+	<!-- 값을 가져올 경우에만 resultType선언 -->
+		select * from addresslist;
+	</select>
+
+	<insert id="writeDao">
+		insert into addresslist(aName, aContent, aAddress, aEmail, aRelation)
+		values(#{aName},#{aContent},#{aAddress},#{aEmail},#{aRelation});
+	</insert>
+	
+	<select id="viewPage" resultType="com.springlec.base.model.ADto">
+		select *from addresslist where seq=#{seq};
+	</select>
+	
+	<delete id="deleteDao">
+		delete from addresslist where seq=#{seq};
+	</delete>
+	
+	<update id="updatelist">
+		update addresslist set aName=#{aName}, aContent=#{aContent}, aAddress=#{aAddress}, 
+		aEmail=#{aEmail},aRelation=#{aRelation} where seq=#{seq};
+	</update>
+	
+	<select id="search" resultType="com.springlec.base.model.ADto">
+		SELECT * FROM addresslist WHERE ${searchoption} LIKE #{keyword}
+	</select>
+	
+</mapper>		
